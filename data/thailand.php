@@ -54,7 +54,7 @@ while($province = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 	$province_arr = array(
 		'code' => $province['PROVINCE_CODE'],
 		'name' => trim($province['PROVINCE_NAME']),
-		'amphors' => $amphur_arr
+		'amphurs' => $amphur_arr
 	);
 	$data[] = $province_arr;
 }
