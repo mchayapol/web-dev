@@ -13,7 +13,7 @@ if (!$con->set_charset("utf8")) {
 
 
 header('Content-Type: application/json; charset=utf-8');
-$sql = "SELECT * FROM province";
+$sql = "SELECT * FROM province ORDER BY PROVINCE_NAME";
 $result = mysqli_query($con,$sql);
 
 $data = array();
@@ -26,13 +26,13 @@ exit;
 while($province = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 
 	
-	$sql = "SELECT * FROM amphur WHERE province_id = ".$province['PROVINCE_ID'];
+	$sql = "SELECT * FROM amphur WHERE province_id = ".$province['PROVINCE_ID']." ORDER BY AMPHUR_NAME";
 	$result2 = mysqli_query($con,$sql);
 	$amphur_arr = array();
 	while($amphur = mysqli_fetch_array($result2,MYSQLI_ASSOC)) {
 
 		
-		$sql = "SELECT district.DISTRICT_CODE, district.DISTRICT_NAME, ZIPCODE FROM district, zipcode WHERE district.amphur_id = ".$amphur['AMPHUR_ID']. " AND district.DISTRICT_ID = zipcode.DISTRICT_ID";
+		$sql = "SELECT district.DISTRICT_CODE, district.DISTRICT_NAME, ZIPCODE FROM district, zipcode WHERE district.amphur_id = ".$amphur['AMPHUR_ID']. " AND district.DISTRICT_ID = zipcode.DISTRICT_ID ORDER BY DISTRICT_NAME";
 
 		$result3 = mysqli_query($con,$sql);
 		$district_arr = array();
